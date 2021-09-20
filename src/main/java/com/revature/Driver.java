@@ -10,9 +10,9 @@ public class Driver {
 
 	public static void main(String[] args) {
 
-		//System.out.println("\n=========================================================");
-		//System.out.println("Welcome");
-		//System.out.println("=========================================================\n");
+		System.out.println("\n=========================================================");
+		System.out.println("Welcome");
+		System.out.println("=========================================================\n");
 		
 		//Create menu object
 		

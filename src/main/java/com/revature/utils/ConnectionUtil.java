@@ -15,6 +15,7 @@ public class ConnectionUtil {
 			try {
 				Class.forName("org.postgresql.Driver");//searching for the postgres driver, which is from dependency
 			} catch(ClassNotFoundException e) {
+				System.out.println("connectioned failed at logging in");
 				e.printStackTrace(); //tells us what went wrong;
 			}
 			

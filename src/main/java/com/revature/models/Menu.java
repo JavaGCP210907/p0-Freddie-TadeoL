@@ -10,8 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Menu {
 	
-	//EmployeeDao eDao = new EmployeeDao();//so we can use its methods
-	//RoleDao rDao = new RoleDao();
+	ItemDao iDao = new ItemDao();//so we can use its methods
 	Logger log = LogManager.getLogger(Menu.class);
 
 	//All of menu options and control flow are contained within this method
@@ -30,7 +29,7 @@ public class Menu {
 			//display the menu as long as the displayMenu boolean is true
 			while (displayMenu) {
 				
-				log.info("ENTER WHILE MAIN LOOP");
+				//log.info("ENTER WHILE MAIN LOOP");
 				
 				System.out.println("-------------------");
 				System.out.println("Choose an Option:");
@@ -38,12 +37,19 @@ public class Menu {
 			
 				//menu options
 				System.out.println("hi -> get greated");
-				System.out.println("employees -> show all employees");
-				System.out.println("employeesById -> get employees with a certain id#");
-				System.out.println("addNewEmployee -> add new employee");
-				System.out.println("deleteEmployee -> delete an current employee");
 				
-				System.out.println("updateSalary -> update a role salary");
+				System.out.println("items -> show all items");
+				System.out.println("shippingLogs -> get both shippinglogs and transactions");
+				//explain more details of items shipped 
+				System.out.println("transaction -> get info of a shipment");
+				System.out.println("buyers -> show buyers/suppliers");
+				
+				System.out.println("sell -> sell item");
+				System.out.println("buy -> order item");
+				
+				System.out.println("updateBuyers -> update a customors info");
+				System.out.println("addBuyers -> add new custmor info");
+				
 				
 				System.out.println("exit -> exit application");
 				
@@ -66,11 +72,28 @@ public class Menu {
 				
 				}
 				
+				case "items": {//get the List of Employees from the DAO layer
+					//nothing is here yet, but will do some sql functionsallity
+					
+					List<Item> items = iDao.getItems();
+					
+					//BEN - enhanced for loop
+					for (Item emp : items) {
+					System.out.println(emp);
+					}
+					//System.out.println(employees);
+					
+					
+					//log.info("USER RETRIVED LIST OF ALL EMPLOYEES");
+					
+					break;
+				}
+				
 				case "exit": {
 					displayMenu = false; //this is how we break out og the while loop, ending the menu display
 					System.out.println("bye!! come again.");
 					
-					log.warn("Closing main loop - " + displayMenu + " - DisplayMenu");
+					//log.warn("Closing main loop - " + displayMenu + " - DisplayMenu");
 					
 					break;
 					

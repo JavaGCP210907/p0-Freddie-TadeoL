@@ -27,15 +27,17 @@ dependencies {
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:28.2-jre'
 
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+    	// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
     
-     // https://mvnrepository.com/artifact/org.postgresql/postgresql
+   // https://mvnrepository.com/artifact/org.postgresql/postgresql
 	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
-//so java can communicte with our postgresql database
-    
-    //This </ is the log4j2 dependencies link
+	//so java can communicte with our postgresql database
+
+
+	//This </ is the log4j2 dependencies link
 	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
-    
 }
