@@ -30,6 +30,7 @@ public class ItemDao implements ItemDaoInterface {
 			// String sql = "SELECT * FROM \”schema_name”\.employees";
 			// String sql = "select * from \”Krusty_Crab”\.employees";
 
+			
 			// put the SQL query into a Statement object
 			Statement s = conn.createStatement();
 
