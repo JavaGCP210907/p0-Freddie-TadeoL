@@ -5,6 +5,8 @@ import java.util.List;
 import com.revature.models.ShippingLog;
 
 public interface ShippingLogDaoInterface {
+	
+	//C-create/insert, R-read/select, U-update, D-delete
 
 
 	//SELECT *

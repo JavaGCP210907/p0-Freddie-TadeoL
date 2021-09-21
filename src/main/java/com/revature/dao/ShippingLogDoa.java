@@ -14,6 +14,8 @@ import com.revature.utils.ConnectionUtil;
 
 public class ShippingLogDoa implements ShippingLogDaoInterface  {
 
+	//C-create/insert, R-read/select, U-update, D-delete
+	
 	@Override
 	public List<ShippingLog> createShippingLog() {
 		// TODO Auto-generated method stub

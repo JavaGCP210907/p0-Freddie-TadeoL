@@ -15,6 +15,8 @@ import com.revature.models.Item;
 import com.revature.utils.ConnectionUtil;
 
 public class ItemDao implements ItemDaoInterface {
+	
+	//C-create/insert, R-read/select, U-update, D-delete
 
 	@Override
 	public List<Item> getItems() {

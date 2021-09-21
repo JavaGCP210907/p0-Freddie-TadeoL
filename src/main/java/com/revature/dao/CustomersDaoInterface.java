@@ -24,6 +24,8 @@ public interface CustomersDaoInterface {
 	//UPDATE
 	//UPDATE avengers SET active = FALSE WHERE hero_name = 'Hulk';
 	public void updateCustomer(Customers Customer);
+	public void updateCustomerAllInfo(int customerID, String username, String address, String phoneNumber);
+	public void updateCustomerAdreess(int customerID, String address);
 	//DELETE
 	public void removeCustomer(int id); // this will remove employees using their id
 	

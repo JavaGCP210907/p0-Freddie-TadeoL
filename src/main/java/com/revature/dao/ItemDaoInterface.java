@@ -5,6 +5,8 @@ import java.util.List;
 import com.revature.models.Item;
 
 public interface ItemDaoInterface {
+	
+	//C-create/insert, R-read/select, U-update, D-delete
 
 	//SELECT *
 		public List<Item> getItems();//return a list of all employees

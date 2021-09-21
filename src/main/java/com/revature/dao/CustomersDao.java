@@ -17,6 +17,8 @@ import com.revature.models.ShippingLog;
 import com.revature.utils.ConnectionUtil;
 
 public class CustomersDao implements CustomersDaoInterface {
+	
+	//C-create/insert, R-read/select, U-update, D-delete
 
 	@Override
 	public List<Customers> getCustomers() {
@@ -94,7 +96,29 @@ public class CustomersDao implements CustomersDaoInterface {
 
 	@Override
 	public void addCustomer(Customers Customer) {
-		// TODO Auto-generated method stub
+try(Connection conn = ConnectionUtil.getConnection()){
+			
+			// write out SQL query and store it in a String
+			String sql = "insert into buyers (username, address, phoneNumber)" +
+			"values (?, ?, ?)";//line break a sql statement in java by concatenation (not the +)
+						
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, Customer.getUsername());
+			ps.setString(2, Customer.getAddress());
+			ps.setString(3, Customer.getPhoneNumber());
+			
+			ps.executeUpdate();//for anything that is not a Select statement, we use executeUpdate()
+
+			//send confirmation to the console if successful
+			System.out.println("Customer was created successful. \n" + "Customer: " + Customer.getUsername());
+			
+		} catch (SQLException e) {
+			System.out.println("something went wrong with your database");
+			e.printStackTrace();
+		}
+
 		
 	}
 
@@ -103,12 +127,9 @@ public class CustomersDao implements CustomersDaoInterface {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void updateCustomer(Customers Customer) {
-		//UPDATE avengers SET active = FALSE WHERE hero_name = 'Hulk';
 		
 		/*
+		 * 
 		 * String sql requsting varbles used (?, ?, ?) (^^like_above^^)
 		 * prepared statment to get new info
 		 * execute
@@ -118,11 +139,9 @@ public class CustomersDao implements CustomersDaoInterface {
 		 * 
 		 * down here some
 		 * catch
+		 * ------------------------------------------------------------------
 		 * 
-		 * 
-		 */
-		
-		/*
+		 *
 		 * try(Connection conn = ConnectionUtil.getConnection()){
 			
 			// write out SQL query and store it in a String
@@ -170,6 +189,69 @@ public class CustomersDao implements CustomersDaoInterface {
 			e.printStackTrace();
 		}
 		 */
+		
+	
+
+	@Override
+	public void updateCustomerAllInfo(int customerID, String username, 
+									String address, String phoneNumber) {
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			
+			//UPDATE avengers SET active = FALSE WHERE hero_name = 'Hulk';
+			//String sql = "update roles set role_salary = ? where role_title = ?";
+			
+			//UPDATE buyers SET username= 'nerdstop', address= 'test', phonenumber= '444-555-654' WHERE customerid= 1;
+			String sql = "update buyers set username = ?, address= ?, phonenumber= ? where customerid = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, username);
+			ps.setString(2, address);
+			ps.setString(3, phoneNumber);
+			ps.setInt(4, customerID);
+			
+			ps.executeUpdate();
+			
+			System.out.println("user: " + customerID + " info has been updated" );
+			
+			
+		}catch (SQLException e) {
+			System.out.println("Updating your info has failed");
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	@Override
+	public void updateCustomerAdreess(int customerID, String address) {
+	try(Connection conn = ConnectionUtil.getConnection()){
+			
+			//UPDATE avengers SET active = FALSE WHERE hero_name = 'Hulk';
+			//String sql = "update roles set role_salary = ? where role_title = ?";
+			String sql = "update buyers set address = ? where customerid = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, address);
+			ps.setInt(2, customerID);
+			
+			ps.executeUpdate();
+			
+			System.out.println("user: " + customerID + " address has been updated to: " + address);
+			
+			
+		}catch (SQLException e) {
+			System.out.println("Updating your info has failed");
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void updateCustomer(Customers Customer) {
+		// TODO Auto-generated method stub
 		
 	}
 	

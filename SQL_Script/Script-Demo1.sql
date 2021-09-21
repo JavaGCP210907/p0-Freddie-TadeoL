@@ -118,6 +118,8 @@ VALUES ('Walmart', '1234 N. Esco st.', '7054228572'),
 	
 SELECT * FROM buyers;
 
+UPDATE buyers SET username= 'nerdstop', address= 'test', phonenumber= '444-555-654' WHERE customerid= 1;
+
 
 --------------------------------------------------------------------------------------------
 
