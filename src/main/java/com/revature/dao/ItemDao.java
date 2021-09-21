@@ -93,14 +93,55 @@ public class ItemDao implements ItemDaoInterface {
 
 	@Override
 	public void addItem(Item item) {
-		// TODO Auto-generated method stub
+try(Connection conn = ConnectionUtil.getConnection()){
+			
+			// write out SQL query and store it in a String
+			String sql = "insert into items (itemName, departmentID, size, cost, amountStocked, price)" +
+			"values (?, ?, ?, ?, ?, ?)";//line break a sql statement in java by concatenation (not the +)
+						
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, item.getItemName());
+			ps.setInt(2, item.getDepartmentID());
+			ps.setString(3, item.getSize());
+			ps.setDouble(4, item.getCost());
+			ps.setInt(5, item.getAmountStocked());
+			ps.setDouble(6, item.getPrice());
+
+			
+			ps.executeUpdate();//for anything that is not a Select statement, we use executeUpdate()
+
+			//send confirmation to the console if successful
+			System.out.println("Item was created successful. \n" + "Item: " + item.getItemName());
+			
+		} catch (SQLException e) {
+			System.out.println("something went wrong with your database");
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void removeItem(int id) {
-		// TODO Auto-generated method stub
-
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			
+			String sql = "delete from items where itemID = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			
+			System.out.println("Enter the ItemID#: " + id);
+			
+			
+		}catch (SQLException e) {
+			System.out.println("You can't fire me i quit!");
+			System.out.println("something went wrong with your database");
+			e.printStackTrace();
+		}
 	}
-
 }
+
+

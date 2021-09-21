@@ -95,6 +95,7 @@ VALUES (100, 1, 1, 800),
 	
 	
 SELECT * FROM shipmentItems;
+select * from shipmentItems where shipmentID = 1;
 
 
 INSERT INTO shippingLog (shipmentID, customerID)
