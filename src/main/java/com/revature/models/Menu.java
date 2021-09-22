@@ -12,7 +12,8 @@ public class Menu {
 
 	ShippingLogDoa slDao = new ShippingLogDoa();
 	CustomersDao cDao = new CustomersDao();
-	ItemDao iDao = new ItemDao();// so we can use its methods
+	ItemDao iDao = new ItemDao();
+
 	Logger log = LogManager.getLogger(Menu.class);
 
 	// All of menu options and control flow are contained within this method
@@ -24,16 +25,23 @@ public class Menu {
 
 		// pretty greeting :)
 		System.out.println("\n=========================================================");
-		System.out.println("Welcome to the Krusty Crab Employee Management System!");
+		System.out.println("Welcome to the Fred's Inventory Management System!");
 		System.out.println("=========================================================\n");
 
 		// display the menu as long as the displayMenu boolean is true
 		while (displayMenu) {
 
 			// log.info("ENTER WHILE MAIN LOOP");
-
+			
+			//To-Do:
+			//clean up code format
+			//fix up printed menu
+			//debug safty checks
+			//put log tackers
+			
+			//C-create/insert, R-read/select, U-update, D-delete
 			System.out.println("-------------------");
-			System.out.println("Choose an Option:( X|-Not Implemented, & W|-Working on");
+			System.out.println("Choose an Option:( X|-Not Implemented, & W|-Working on )");
 			System.out.println("-------------------");
 
 			// menu options
@@ -49,28 +57,33 @@ public class Menu {
 			// add transaction
 			System.out.println("W|sell -> sell item");
 			System.out.println("W|buy -> order item");
-
+			
+			// *w|add log (buy or sell)
+			// update or delete a log would be illegal?
+			
 			// explain more details of items shipped
 			System.out.println("transaction -> get info of one Shipment");
-			System.out.println("lookUpItem -> get info of one Item");
-			System.out.println("lookUpCustomer -> get info of one Customer");
+			
+			System.out.println("X|lookUpItem -> get info of one Item");
+			System.out.println("X|lookUpCustomer -> get info of one Customer");
 			// show invudal info by ID
-			// item
-			// buyer
+			// **item
+			// **buyer
 
 			// updateCustomerAdreess, updateCustomerAllInfo
 			System.out.println("updateCustomerAdreess, or updateCustomerAllInfo -> update a customors info");
 			System.out.println("addBuyers -> add new custmor info");
-
+			// *delete buyer (need backup table to hold loss info ID)
+			
 			// can update delete to have backup graveyard items table to put old items
+			System.out.println("X|updateItemPrice, or updateItemAllInfo -> update a item info");
 			System.out.println("deleteItem -> remove Item to warehouse");
 			System.out.println("addItem -> add new Item to warehouse");
 
 			// more functions update/delete/add/show
-			// update item (price?) (backup table with id, price, and date changed)
-			// delete buyer (need backup table to hold loss info ID)
-			// add log (buy or sell)
-			// update or delete a log would be illegal?
+			// **update item (price?) (backup table with id, price, and date changed)
+			
+			
 
 			System.out.println("exit -> exit application");
 
@@ -359,10 +372,25 @@ public class Menu {
 				 * 
 				 */
 				String itemCheck = "0";
+				int empID = 0;
+				int temp = 0;
+				int temp3 = 0;
+				int temp4 = 0;
+				double temp2 = 0;
+				int counter = 0;
 				System.out.println(
 						"This will purschase more items and/or add more in stock?\n[Enter: 1 to continue/0 to abort]");
 				String dCheck = scan.next();
 				scan.nextLine();// still need this to move to the next line
+
+				// statment starts
+				System.out.println("who is buying this? [Enter ID#]");
+				// what if the user inputs a string? program crashes
+				// if statement, try/catch
+				// polish your project a bit and add some foll proofing
+				// if a # run as normal, else if !# then reloop and ask for a number
+				int custID = scan.nextInt();
+				scan.nextLine();
 
 				if (dCheck.equals("no") || dCheck.equals("No") || dCheck.equals("0")) {
 
@@ -372,12 +400,12 @@ public class Menu {
 				} else if (dCheck.equals("yes") || dCheck.equals("Yes") || dCheck.equals("1")) {
 
 					// statment starts
-					System.out.println("Is the Item already in stock? [Enter ID# or 0]");
+					System.out.println("Is the Item already in stock if so enter ID#? [Enter ID# or 0]");
 					// what if the user inputs a string? program crashes
 					// if statement, try/catch
 					// polish your project a bit and add some foll proofing
 					// if a # run as normal, else if !# then reloop and ask for a number
-					int empID = scan.nextInt();
+					empID = scan.nextInt();
 					scan.nextLine();
 
 					List<Item> itemA = iDao.getItemById(empID);
@@ -386,14 +414,91 @@ public class Menu {
 					for (Item ID : itemA) {
 						System.out.println(ID.toString());
 						itemCheck = "yes";
+						System.out.println(itemCheck);
 					}
-					
+
 					if (itemCheck.equals("no") || itemCheck.equals("No") || itemCheck.equals("0")) {
 
-						//iDao.addItem(empID);
+						System.out.println("What is this Item called?");
+						// what if the user inputs a string? program crashes
+						// if statement, try/catch
+						// polish your project a bit and add some foll proofing
+						// if a # run as normal, else if !# then reloop and ask for a number
+						String itemName = scan.nextLine();
+
+						System.out.println("What type of item is this?");
+						// what if the user inputs a string? program crashes
+						// if statement, try/catch
+						// polish your project a bit and add some foll proofing
+						// if a # run as normal, else if !# then reloop and ask for a number
+						int departmentID = scan.nextInt();
+						scan.nextLine();
+
+						System.out.println("how big is this item");
+						// what if the user inputs a string? program crashes
+						// if statement, try/catch
+						// polish your project a bit and add some foll proofing
+						// if a # run as normal, else if !# then reloop and ask for a number
+						String size = scan.nextLine();
+
+						System.out.println("how much does this item cost?");
+						// what if the user inputs a string? program crashes
+						// if statement, try/catch
+						// polish your project a bit and add some foll proofing
+						// if a # run as normal, else if !# then reloop and ask for a number
+						double cost = scan.nextDouble();
+						scan.nextLine();
+
+						System.out.println("How much of this item is being brought?");
+						// what if the user inputs a string? program crashes
+						// if statement, try/catch
+						// polish your project a bit and add some foll proofing
+						// if a # run as normal, else if !# then reloop and ask for a number
+						int amountStocked = scan.nextInt();
+						scan.nextLine();
+
+						System.out.println("How much how will this item be solded?");
+						// what if the user inputs a string? program crashes
+						// if statement, try/catch
+						// polish your project a bit and add some foll proofing
+						// if a # run as normal, else if !# then reloop and ask for a number
+						double price = scan.nextDouble();
+						scan.nextLine();
+
+						iDao.addItem(itemName, departmentID, size, cost, amountStocked, price);
+
+						slDao.addShippingLog(custID);
+
+						List<Item> transactions = iDao.getItems();
+
+						// BEN - enhanced for loop
+						for (Item emp : transactions) {
+							counter++;
+							temp = counter;
+							temp3 = emp.getItemID();
+
+							System.out.println("temp: " + temp + "\ntemp2: " + temp2 + "temp3: " + temp + "\ncounter: "
+									+ counter + "\n---------------------");
+						}
+
+						List<ShippingLog> transactionz = slDao.createShippingLog();
+
+						// BEN - enhanced for loop
+						counter = 0;
+						for (ShippingLog emp : transactionz) {
+							counter++;
+							temp4 = counter;
+
+							System.out.println("temp2: " + temp2 + "\ncounter: " + counter + "\n---------------------");
+						}
+
+						slDao.addShipmentLog(amountStocked, temp4, temp3, price);
+						System.out.println("***Completed***");
+
+						log.warn("Added Item# " + empID);
+
 						System.out.println("***Inputing new item***");
 
-						break;
 					} else if (itemCheck.equals("yes") || itemCheck.equals("Yes") || itemCheck.equals("1")) {
 
 						System.out.println("How much of this item is being brought?");
@@ -403,18 +508,60 @@ public class Menu {
 						// if a # run as normal, else if !# then reloop and ask for a number
 						int stock = scan.nextInt();
 						scan.nextLine();
-						
+
+						System.out.println("how much does this item cost?");
+						// what if the user inputs a string? program crashes
+						// if statement, try/catch
+						// polish your project a bit and add some foll proofing
+						// if a # run as normal, else if !# then reloop and ask for a number
+						double cost = scan.nextDouble();
+						scan.nextLine();
+
 						iDao.updateItemStock(empID, stock);
-						//slDao.addShippingLog(shippingLog);
-						//slDao.createshipmentItems();
-						
+						slDao.addShippingLog(custID);
+
+						List<ShippingLog> transaction = slDao.createShippingLog();
+
+						// BEN - enhanced for loop
+						for (ShippingLog emp : transaction) {
+							counter++;
+							temp4 = counter;
+							temp3 = emp.getItemID();
+
+							System.out.println("fristloop" + "temp: " + temp + "\ntemp2: " + temp2 + "temp3: " + temp
+									+ "\ncounter: " + counter + "\n---------------------");
+						}
+
+						List<ShippingLog> transactions = slDao.createshipmentItems();
+
+						// BEN - enhanced for loop
+						counter = 0;
+						for (ShippingLog emp : transaction) {
+							counter++;
+							temp = counter;
+							temp2 = emp.getPrice();
+
+							System.out.println("secondloop" + "temp: " + temp + "\ncounter: " + counter
+									+ "\n---------------------");
+						}
+
+						List<Item> transactionsz = iDao.getItemById(empID);
+
+						// BEN - enhanced for loop
+						for (Item emp : transactionsz) {
+							temp3 = emp.getItemID();
+							temp2 = emp.getPrice();
+
+							System.out.println("thirdloop" + "temp: " + temp + "\ncounter: " + counter
+									+ "\n---------------------");
+						}
+
+						slDao.addShipmentLog(stock, temp4, empID, temp2);
 						System.out.println("***Completed***");
 
 						log.warn("Added Item# " + empID);
 
-						break;
 					}
-					break;
 				}
 				break;
 			}
@@ -440,6 +587,14 @@ public class Menu {
 				} else if (dCheck.equals("yes") || dCheck.equals("Yes") || dCheck.equals("1")) {
 
 					// statment starts
+					System.out.println("who is buying this? [Enter ID#]");
+					// what if the user inputs a string? program crashes
+					// if statement, try/catch
+					// polish your project a bit and add some foll proofing
+					// if a # run as normal, else if !# then reloop and ask for a number
+					int custID = scan.nextInt();
+					scan.nextLine();
+
 					System.out.println("what item is being sold? [Enter ID#]");
 					// what if the user inputs a string? program crashes
 					// if statement, try/catch
@@ -447,7 +602,10 @@ public class Menu {
 					// if a # run as normal, else if !# then reloop and ask for a number
 					int empID = scan.nextInt();
 					scan.nextLine();
-					
+					int temp = 0;
+					double temp2 = 0;
+					int counter = 0;
+
 					System.out.println("how much of the item is being sold? [Enter amount]");
 					// what if the user inputs a string? program crashes
 					// if statement, try/catch
@@ -455,11 +613,24 @@ public class Menu {
 					// if a # run as normal, else if !# then reloop and ask for a number
 					int stock = scan.nextInt();
 					scan.nextLine();
-					
+
 					iDao.updateItemStock(empID, stock);
-					//slDao.addShippingLog(shippingLog);
-					//slDao.createshipmentItems();
-					
+					slDao.addShippingLog(custID);
+
+					List<ShippingLog> transaction = slDao.createShippingLog();
+
+					// BEN - enhanced for loop
+					for (ShippingLog emp : transaction) {
+						counter++;
+						temp = counter;
+						temp2 = emp.getPrice();
+
+						// System.out.println("temp: " + temp + "\ntemp2: " + temp2 + "\ncounter: " +
+						// counter + "\n---------------------");
+					}
+
+					slDao.addShipmentLog(stock, temp, empID, temp2);
+
 					break;
 				}
 				break;

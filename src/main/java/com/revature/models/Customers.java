@@ -6,11 +6,9 @@ public class Customers {
 	private String username;
 	private String address;
 	private String phoneNumber;
-	
-	
-	//************BolierPlate code*****************
-	
-	
+
+	// ************BolierPlate code*****************
+
 	/**
 	 * 
 	 */
@@ -18,7 +16,8 @@ public class Customers {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	//all args
+
+	// all args
 	/**
 	 * @param customerID
 	 * @param username
@@ -32,7 +31,8 @@ public class Customers {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 	}
-	//momst args but not customerID
+
+	// momst args but not customerID
 	/**
 	 * @param username
 	 * @param address
@@ -44,59 +44,69 @@ public class Customers {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 	}
+
 	/**
 	 * @return the customerID
 	 */
 	public int getCustomerID() {
 		return customerID;
 	}
+
 	/**
 	 * @param customerID the customerID to set
 	 */
 	public void setCustomerID(int customerID) {
 		this.customerID = customerID;
 	}
+
 	/**
 	 * @return the username
 	 */
 	public String getUsername() {
 		return username;
 	}
+
 	/**
 	 * @param username the username to set
 	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	/**
 	 * @return the address
 	 */
 	public String getAddress() {
 		return address;
 	}
+
 	/**
 	 * @param address the address to set
 	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	/**
 	 * @return the phoneNumber
 	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
+
 	/**
 	 * @param phoneNumber the phoneNumber to set
 	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
 	@Override
 	public String toString() {
 		return "Customers [customerID=" + customerID + ", username=" + username + ", address=" + address
 				+ ", phoneNumber=" + phoneNumber + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -107,6 +117,7 @@ public class Customers {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -135,7 +146,5 @@ public class Customers {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }

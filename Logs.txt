@@ -10,3 +10,31 @@
 2021-09-19 20:57:46 INFO  Menu:33 - ENTER WHILE MAIN LOOP
 2021-09-19 21:50:47 INFO  Menu:32 - ENTER WHILE MAIN LOOP
 2021-09-20 21:11:45 WARN  Menu:231 - USER DELETED Item# 7
+2021-09-21 20:12:59 WARN  Menu:413 - Added Item# 1
+2021-09-21 20:35:09 WARN  Menu:459 - Added Item# 1
+2021-09-21 20:37:33 WARN  Menu:460 - Added Item# 1
+2021-09-21 20:39:01 WARN  Menu:460 - Added Item# 2
+2021-09-21 20:40:25 WARN  Menu:461 - Added Item# 2
+2021-09-21 20:44:02 WARN  Menu:495 - Added Item# 2
+2021-09-21 20:44:51 WARN  Menu:461 - Added Item# 0
+2021-09-21 20:54:57 WARN  Menu:508 - Added Item# 1
+2021-09-21 20:57:51 WARN  Menu:516 - Added Item# 1
+2021-09-21 21:00:05 WARN  Menu:473 - Added Item# 0
+2021-09-21 21:03:06 WARN  Menu:475 - Added Item# 0
+2021-09-21 21:05:02 WARN  Menu:475 - Added Item# 0
+2021-09-21 21:07:15 WARN  Menu:475 - Added Item# 0
+2021-09-21 21:10:16 WARN  Menu:487 - Added Item# 0
+2021-09-21 21:18:07 WARN  Menu:486 - Added Item# 0
+2021-09-21 21:18:30 WARN  Menu:541 - Added Item# 1
+2021-09-21 21:28:06 WARN  Menu:535 - Added Item# 1
+2021-09-21 21:30:51 WARN  Menu:536 - Added Item# 1
+2021-09-21 21:32:54 WARN  Menu:536 - Added Item# 1
+2021-09-21 21:36:08 WARN  Menu:549 - Added Item# 1
+2021-09-21 21:39:03 WARN  Menu:549 - Added Item# 1
+2021-09-21 21:46:31 WARN  Menu:547 - Added Item# 1
+2021-09-21 21:52:30 WARN  Menu:548 - Added Item# 1
+2021-09-21 21:56:47 WARN  Menu:548 - Added Item# 1
+2021-09-21 21:58:23 WARN  Menu:485 - Added Item# 0
+2021-09-21 22:06:28 WARN  Menu:486 - Added Item# 0
+2021-09-21 22:10:15 WARN  Menu:550 - Added Item# 1
+2021-09-21 22:12:11 WARN  Menu:550 - Added Item# 1

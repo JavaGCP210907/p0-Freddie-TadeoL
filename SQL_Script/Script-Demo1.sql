@@ -11,8 +11,6 @@ CREATE TABLE accounts(
 username text
 );
 
---------------------------------------------------------------------------------------------
-
 CREATE TABLE customers(
 username TEXT,
 customerID int PRIMARY KEY,
@@ -20,6 +18,8 @@ address TEXT,
 sentMoney decimal,
 phoneNumber TEXT
 );
+--------------------------------------------------------------------------------------------
+
 
 CREATE TABLE buyers(
 customerID serial PRIMARY KEY,
@@ -47,7 +47,7 @@ PRIMARY KEY (shipmentID, itemID)
 );
 
 CREATE TABLE shippingLog(
-shipmentID int PRIMARY KEY,
+shipmentID serial PRIMARY KEY,
 customerID int REFERENCES buyers (customerID)
 );
 
@@ -62,10 +62,26 @@ itemID int,
 PRIMARY KEY (department, item)
 );
 
+DROP TABLE IF EXISTS shippingLog;
+TRUNCATE TABLE shippingLog;
+DELETE FROM shippingLog;
+DELETE FROM shippingLog;
+
 DROP TABLE IF EXISTS shipmentItems;
 TRUNCATE TABLE shipmentItems;
 DELETE FROM shipmentItems;
 DELETE FROM shipmentItems;
+
+DROP TABLE IF EXISTS items;
+TRUNCATE TABLE items;
+DELETE FROM items;
+DELETE FROM items;
+
+DROP TABLE IF EXISTS buyers;
+TRUNCATE TABLE buyers;
+DELETE FROM buyers;
+DELETE FROM buyers;
+
 
 
 ALTER TABLE bestSellers ADD COLUMN active boolean;
@@ -90,19 +106,21 @@ INSERT INTO shipmentItems (quantity, shipmentID, itemID, price)
 VALUES (100, 1, 1, 800),
 		(200, 1, 5, .7),
 		(150, 2, 1, 800),
-		(50, 3, 4, 20),
-		(400, 4, 6, 4);
+		(50, 3, 4, 20);
 	
 	
 SELECT * FROM shipmentItems;
 select * from shipmentItems where shipmentID = 1;
 
 
-INSERT INTO shippingLog (shipmentID, customerID)
-VALUES (1, 2),
-		(2, 3),
-		(3, 1),
-		(4, 4);
+INSERT INTO shippingLog (customerID)
+VALUES (2),
+		(3),
+		(1),
+		(4);
+	
+	insert into shippingLog (customerID) 
+	VALUES (2);
 	
 	
 SELECT * FROM shippingLog;

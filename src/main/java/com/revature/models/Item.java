@@ -1,8 +1,8 @@
 package com.revature.models;
 
 public class Item {
-	
-	//fields for the Item class - must match those in your database
+
+	// fields for the Item class - must match those in your database
 	private int itemID;
 	private String itemName;
 	private int departmentID;
@@ -10,17 +10,13 @@ public class Item {
 	private double cost;
 	private int amountStocked;
 	private double price;
-	
-	
-	
-	//constustors and boilerplate code below----------------------
-	
+
+	// constustors and boilerplate code below----------------------
+
 	public Item() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	/**
 	 * @param itemID
@@ -43,8 +39,6 @@ public class Item {
 		this.price = price;
 	}
 
-
-
 	/**
 	 * @param itemName
 	 * @param departmentID
@@ -63,15 +57,11 @@ public class Item {
 		this.price = price;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Item [itemID=" + itemID + ", itemName=" + itemName + ", departmentID=" + departmentID + ", size=" + size
 				+ ", cost=" + cost + ", amountStocked=" + amountStocked + ", price=" + price + "]";
 	}
-
-
 
 	/**
 	 * @return the itemID
@@ -80,16 +70,12 @@ public class Item {
 		return itemID;
 	}
 
-
-
 	/**
 	 * @param itemID the itemID to set
 	 */
 	public void setItemID(int itemID) {
 		this.itemID = itemID;
 	}
-
-
 
 	/**
 	 * @return the itemName
@@ -98,16 +84,12 @@ public class Item {
 		return itemName;
 	}
 
-
-
 	/**
 	 * @param itemName the itemName to set
 	 */
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-
-
 
 	/**
 	 * @return the departmentID
@@ -116,16 +98,12 @@ public class Item {
 		return departmentID;
 	}
 
-
-
 	/**
 	 * @param departmentID the departmentID to set
 	 */
 	public void setDepartmentID(int departmentID) {
 		this.departmentID = departmentID;
 	}
-
-
 
 	/**
 	 * @return the size
@@ -134,16 +112,12 @@ public class Item {
 		return size;
 	}
 
-
-
 	/**
 	 * @param size the size to set
 	 */
 	public void setSize(String size) {
 		this.size = size;
 	}
-
-
 
 	/**
 	 * @return the cost
@@ -152,16 +126,12 @@ public class Item {
 		return cost;
 	}
 
-
-
 	/**
 	 * @param cost the cost to set
 	 */
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
-
-
 
 	/**
 	 * @return the amountStocked
@@ -170,16 +140,12 @@ public class Item {
 		return amountStocked;
 	}
 
-
-
 	/**
 	 * @param amountStocked the amountStocked to set
 	 */
 	public void setAmountStocked(int amountStocked) {
 		this.amountStocked = amountStocked;
 	}
-
-
 
 	/**
 	 * @return the price
@@ -188,16 +154,12 @@ public class Item {
 		return price;
 	}
 
-
-
 	/**
 	 * @param price the price to set
 	 */
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -215,8 +177,6 @@ public class Item {
 		result = prime * result + ((size == null) ? 0 : size.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -249,14 +209,5 @@ public class Item {
 			return false;
 		return true;
 	}
-
-
-
-	
-	
-	
-	
-	
-	
 
 }
