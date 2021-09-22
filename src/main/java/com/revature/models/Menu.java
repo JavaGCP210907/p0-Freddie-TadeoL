@@ -23,6 +23,7 @@ public class Menu {
 		boolean displayMenu0 = true;
 		boolean displayMenu1 = false;
 		boolean displayMenu2 = false; // going to use this to toggle whether the menu continues after user input
+		boolean logIn = false;
 		// int in;
 		Scanner scan = new Scanner(System.in);
 
@@ -34,71 +35,34 @@ public class Menu {
 		// display the menu as long as the displayMenu boolean is true
 		while (displayMenu) {
 
-			// log.info("ENTER WHILE MAIN LOOP");
+		
 
 			// To-Do:
-			// clean up code format
+			// put log tackers
 			// fix up printed menu
 			// debug safty checks
-			// put log tackers
+			// clean up code format
 
 			// C-create/insert, R-read/select, U-update, D-delete
+
+			
+			
 			System.out.println("-------------------");
 			System.out.println("Choose an Option:( X|-Not Implemented, & W|-Working on )");
 			System.out.println("-------------------");
-
-			System.out.println("\n=======================(Display [Read tables])=======================\n");
-			// display tables
-			System.out.println("items -> show all items.");
-			System.out.println("shipFullLog -> get all transactions details.");
-			System.out.println("shippingLog -> get shippinglogs.");
-			System.out.println("buyers -> show all buyers and suppliers.");
-
-			System.out.println("\n======================(Transactions [Insert or update])========================\n");
-
-			// special n hardest, most new and self maded
-			// add transaction
-			System.out.println("addBuyers -> add new customer info");
-			System.out.println("W|sell -> sell item");
-			System.out.println("W|buy -> order item");
-
-			System.out
-					.println("\n========================(Modfiy Inventory [Delete or Insert])======================\n");
-
-			System.out.println("deleteItem -> remove Item to warehouse");
-			System.out.println("addItem -> add new Item to warehouse");
-
-			System.out.println("\n========================(Look up specfic info. [Read])======================\n");
-
-			// *w|add log (buy or sell)
-			// update or delete a log would be illegal?
-
-			// explain more details of items shipped
-			System.out.println("transaction -> get info of one Shipment");
-
-			System.out.println("X|lookUpItem -> get info of one Item");
-			System.out.println("X|lookUpCustomer -> get info of one Customer");
-			// show invudal info by ID
-			// **item
-			// **buyer
 			
-			System.out.println("\n=======================(Update info.)=======================\n");
-
-			// updateCustomerAdreess, updateCustomerAllInfo
-			System.out.println("updateCustomerAdreess, or updateCustomerAllInfo -> update a customors info");
-			// *delete buyer (need backup table to hold loss info ID)
-
-			// can update delete to have backup graveyard items table to put old items
-			System.out.println("X|updateItemPrice, or updateItemAllInfo -> update a item info");
-
-			System.out.println("\n==============================================\n");
-
-			System.out.println("more -> display more options: ");
+			if(displayMenu0 & !logIn) {
+				System.out.println("logIn -> Display Options: ");
+			}
+			
+		
+			
+			//System.out.println("more -> display more options: ");
 
 			// more functions update/delete/add/show
 			// **update item (price?) (backup table with id, price, and date changed)
 
-			System.out.println("exit -> exit application");
+			System.out.println("exit -> Exit application");
 
 			// parse user input after they choose a menu option
 			String input = scan.nextLine();
@@ -119,8 +83,11 @@ public class Menu {
 					System.out.println(emp);
 				}
 				// System.out.println(employees);
+				
+				System.out.println("\n");
+				printMenu();
 
-				// log.info("USER RETRIVED LIST OF ALL EMPLOYEES");
+				log.info("USER RETRIVED LIST OF ALL ITEMS");
 
 				break;
 			}
@@ -136,7 +103,10 @@ public class Menu {
 				}
 				// System.out.println(employees);
 
-				// log.info("USER RETRIVED LIST OF ALL EMPLOYEES");
+				System.out.println("\n");
+				printMenu();
+				
+				log.info("USER RETRIVED LIST OF ALL CUSTOMERS");
 
 				break;
 			}
@@ -163,6 +133,9 @@ public class Menu {
 
 				cDao.addCustomer(emp);
 				System.out.println("***Completed***");
+				log.info("USER ADDED NEW CUSTOMER");
+				System.out.println("\n");
+				printMenu();
 
 				break;
 			}
@@ -177,8 +150,11 @@ public class Menu {
 					System.out.println(emp.toString2());
 				}
 				// System.out.println(employees);
+				
+				System.out.println("\n");
+				printMenu();
 
-				// log.info("USER RETRIVED LIST OF ALL EMPLOYEES");
+				log.info("USER RETRIVED LIST OF ALL SHIPMENT INFO");
 
 				break;
 			}
@@ -193,8 +169,11 @@ public class Menu {
 					System.out.println(emp.toString1());
 				}
 				// System.out.println(employees);
+				
+				System.out.println("\n");
+				printMenu();
 
-				// log.info("USER RETRIVED LIST OF ALL EMPLOYEES");
+				log.info("USER RETRIVED LIST OF ALL SHIPPING LOGS");
 
 				break;
 			}
@@ -215,6 +194,9 @@ public class Menu {
 				for (ShippingLog emp : transaction) {
 					System.out.println(emp.toString2());
 				}
+				
+				log.info("USER RETRIVED THE INFO OF SHIPMENT: " + idInput);
+				printOthers();
 				break;
 
 			}
@@ -266,6 +248,8 @@ public class Menu {
 
 				iDao.addItem(emp);
 				System.out.println("***Completed***");
+				log.info("USER ADD NEW ITEM INTO WAREHOUSE");
+				printInserts();
 
 				break;
 			}
@@ -279,7 +263,8 @@ public class Menu {
 
 				if (dCheck.equals("no") || dCheck.equals("No") || dCheck.equals("0")) {
 
-					break;
+					System.out.println("********ABORTING*******");
+					
 				} else if (dCheck.equals("yes") || dCheck.equals("Yes") || dCheck.equals("1")) {
 
 					System.out.println("What is the Item ID# to delete?");
@@ -298,7 +283,10 @@ public class Menu {
 					break;
 
 				}
-				System.out.println("you reached the end without the getting the checks!!");
+				
+				//System.out.println("you reached the end without the getting the checks!!");
+				printInserts();
+				
 				break;
 			}
 
@@ -319,7 +307,8 @@ public class Menu {
 				cDao.updateCustomerAdreess(titleInput, salaryInput);
 
 				System.out.println("***Successful***");
-
+				log.info("USER UPDATED CUSTOMER'S ADDRESS TO: " + salaryInput);
+				printInserts();
 				break;
 
 			}
@@ -364,7 +353,8 @@ public class Menu {
 				;
 
 				System.out.println("***Successful***");
-
+				log.info("USER UPDATE ALL INFO OF CUSTOMER: " + customerID);
+				printInserts();
 				break;
 			}
 
@@ -390,22 +380,24 @@ public class Menu {
 				String dCheck = scan.next();
 				scan.nextLine();// still need this to move to the next line
 
-				// statment starts
-				System.out.println("who is buying this? [Enter ID#]");
-				// what if the user inputs a string? program crashes
-				// if statement, try/catch
-				// polish your project a bit and add some foll proofing
-				// if a # run as normal, else if !# then reloop and ask for a number
-				int custID = scan.nextInt();
-				scan.nextLine();
+				
 
 				if (dCheck.equals("no") || dCheck.equals("No") || dCheck.equals("0")) {
 
 					System.out.println("***Void transaction***");
+					
 
-					break;
 				} else if (dCheck.equals("yes") || dCheck.equals("Yes") || dCheck.equals("1")) {
 
+					// statment starts
+					System.out.println("who is buying this? [Enter ID#]");
+					// what if the user inputs a string? program crashes
+					// if statement, try/catch
+					// polish your project a bit and add some foll proofing
+					// if a # run as normal, else if !# then reloop and ask for a number
+					int custID = scan.nextInt();
+					scan.nextLine();
+					
 					// statment starts
 					System.out.println("Is the Item already in stock if so enter ID#? [Enter ID# or 0]");
 					// what if the user inputs a string? program crashes
@@ -421,7 +413,7 @@ public class Menu {
 					for (Item ID : itemA) {
 						System.out.println(ID.toString());
 						itemCheck = "yes";
-						System.out.println(itemCheck);
+						//System.out.println(itemCheck);
 					}
 
 					if (itemCheck.equals("no") || itemCheck.equals("No") || itemCheck.equals("0")) {
@@ -484,8 +476,8 @@ public class Menu {
 							temp = counter;
 							temp3 = emp.getItemID();
 
-							System.out.println("temp: " + temp + "\ntemp2: " + temp2 + "temp3: " + temp + "\ncounter: "
-									+ counter + "\n---------------------");
+							//System.out.println("temp: " + temp + "\ntemp2: " + temp2 + "temp3: " + temp + "\ncounter: "
+								//	+ counter + "\n---------------------");
 						}
 
 						List<ShippingLog> transactionz = slDao.createShippingLog();
@@ -496,7 +488,7 @@ public class Menu {
 							counter++;
 							temp4 = counter;
 
-							System.out.println("temp2: " + temp2 + "\ncounter: " + counter + "\n---------------------");
+							//System.out.println("temp2: " + temp2 + "\ncounter: " + counter + "\n---------------------");
 						}
 
 						slDao.addShipmentLog(amountStocked, temp4, temp3, price);
@@ -535,8 +527,8 @@ public class Menu {
 							temp4 = counter;
 							temp3 = emp.getItemID();
 
-							System.out.println("fristloop" + "temp: " + temp + "\ntemp2: " + temp2 + "temp3: " + temp
-									+ "\ncounter: " + counter + "\n---------------------");
+							//System.out.println("fristloop" + "temp: " + temp + "\ntemp2: " + temp2 + "temp3: " + temp
+							//		+ "\ncounter: " + counter + "\n---------------------");
 						}
 
 						List<ShippingLog> transactions = slDao.createshipmentItems();
@@ -548,8 +540,8 @@ public class Menu {
 							temp = counter;
 							temp2 = emp.getPrice();
 
-							System.out.println("secondloop" + "temp: " + temp + "\ncounter: " + counter
-									+ "\n---------------------");
+						//	System.out.println("secondloop" + "temp: " + temp + "\ncounter: " + counter
+						//			+ "\n---------------------");
 						}
 
 						List<Item> transactionsz = iDao.getItemById(empID);
@@ -559,8 +551,8 @@ public class Menu {
 							temp3 = emp.getItemID();
 							temp2 = emp.getPrice();
 
-							System.out.println("thirdloop" + "temp: " + temp + "\ncounter: " + counter
-									+ "\n---------------------");
+							//System.out.println("thirdloop" + "temp: " + temp + "\ncounter: " + counter
+							//		+ "\n---------------------");
 						}
 
 						slDao.addShipmentLog(stock, temp4, empID, temp2);
@@ -570,6 +562,8 @@ public class Menu {
 
 					}
 				}
+				System.out.println("\n");
+				printMenu();
 				break;
 			}
 
@@ -581,6 +575,8 @@ public class Menu {
 				 * brought/brought in update shipmentItemsLog update items in storage
 				 * 
 				 */
+				int empID = 0;
+				
 				System.out.println(
 						"This will change our invertory, are you sure you want to do this?\n[Enter: 1 for yes/0 for no]");
 				String dCheck = scan.next();
@@ -590,7 +586,7 @@ public class Menu {
 
 					System.out.println("***Void transaction***");
 
-					break;
+			
 				} else if (dCheck.equals("yes") || dCheck.equals("Yes") || dCheck.equals("1")) {
 
 					// statment starts
@@ -607,7 +603,7 @@ public class Menu {
 					// if statement, try/catch
 					// polish your project a bit and add some foll proofing
 					// if a # run as normal, else if !# then reloop and ask for a number
-					int empID = scan.nextInt();
+					empID = scan.nextInt();
 					scan.nextLine();
 					int temp = 0;
 					double temp2 = 0;
@@ -640,31 +636,54 @@ public class Menu {
 
 					break;
 				}
+				log.info("USER SOLD ITEM: " + empID);
+				System.out.println("\n");
+				printMenu();
 				break;
 			}
+			
+			case "logIn": {
+				
+				input = "more";
+				log.info("USER LOGGED IN");
+			
+			}
+			
 
 			case "more": {
-				System.out.println("display more options: ");
+				//System.out.println("\n==============================================\n");
+				//System.out.println("display more options: ");
 				if (displayMenu0 && !displayMenu1) {
 					displayMenu1 = true;
 					displayMenu0 = false;
 					displayMenu2 = false;
-
-					System.out.println("display info options: ");
+					logIn = true;
+					
+					printMenu();
+					
+					if(!displayMenu1) {
+					printMenu();}
+			
+					//System.out.println("\n==============================================\n");
 
 				} else if (displayMenu1 && !displayMenu2) {
 					displayMenu2 = true;
 					displayMenu0 = false;
 					displayMenu1 = false;
+					logIn = true;
 
-					System.out.println("display add/delete options: ");
+					printInserts();
 
 				} else {
 					displayMenu0 = true;
 					displayMenu1 = false;
 					displayMenu2 = false;
+					logIn = true;
+					//System.out.println("0: " + displayMenu0 + " 1: " + displayMenu1 + " 2: " + displayMenu2 + " main: " + displayMenu);
 
-					System.out.println("display main options: ");
+					printOthers();
+					
+					//System.out.println("\n==============================================\n");
 				}
 
 				break;
@@ -673,9 +692,10 @@ public class Menu {
 
 			case "exit": {
 				displayMenu = false; // this is how we break out og the while loop, ending the menu display
-				System.out.println("bye!! come again.");
+				System.out.println("Logging off");
+				//print();
 
-				// log.warn("Closing main loop - " + displayMenu + " - DisplayMenu");
+				log.warn("Closing main loop|| " + displayMenu + " = DisplayMenu");
 
 				break;
 
@@ -687,10 +707,69 @@ public class Menu {
 			}// end of switch statement
 
 		} // end of while loop
-
-		System.out.println("Thank you for using our Krusty Crab EMS");
+		
+		log.info("USER LOGGING OFF");
+		System.out.println("Thank you for using our I&SM System");
 		scan.close();
 
 	}// end of method
 
+	public void printMenu() {
+		System.out.println("\nDisplay main options: ");
+		
+		System.out.println("\n=======================(Display [Read tables] )=======================\n");
+		// display tables
+		System.out.println("items -> show all items.");
+		System.out.println("shipFullLog -> get all transactions details.");
+		System.out.println("shippingLog -> get shippinglogs.");
+		System.out.println("buyers -> show all buyers and suppliers.");
+
+		System.out.println("\n======================(Transactions [Insert or update] )========================\n");
+
+		// special n hardest, most new and self maded
+		// add transaction
+		System.out.println("addBuyers -> add new customer info");
+		System.out.println("W|sell -> sell item");
+		System.out.println("W|buy -> order item");
+		
+		System.out.println("\nmore -> display more options: \n");
+		
+	}
+	
+	public void printInserts() {
+		System.out.println("\nDisplay Add/Delete options: ");
+		
+		System.out
+		.println("\n========================(Modfiy Inventory [Delete or Insert] )======================\n");
+
+System.out.println("deleteItem -> remove Item to warehouse");
+System.out.println("addItem -> add new Item to warehouse");
+
+		
+		System.out.println("\n=======================( Update info. )=======================\n");
+
+		// updateCustomerAdreess, updateCustomerAllInfo
+		System.out.println("updateCustomerAdreess -> update a customors info\nupdateCustomerAllInfo -> update a customors info");
+		// *delete buyer (need backup table to hold loss info ID)
+
+		// can update delete to have backup graveyard items table to put old items
+		System.out.println("X|updateItemPrice -> update a item info\nX|updateItemAllInfo -> update a item info");
+
+		//System.out.println("\n==============================================\n");
+
+		System.out.println("\nmore -> display more options: \n");
+		
+	}
+	public void printOthers() {
+		System.out.println("\nDisplay Search options: ");
+		
+		System.out.println("\n========================(Look up specfic info. [Read])======================\n");
+		System.out.println("transaction -> get info of one Shipment");
+
+		System.out.println("X|lookUpItem -> get info of one Item");
+		System.out.println("X|lookUpCustomer -> get info of one Customer");
+				
+		System.out.println("\nmore -> display more options: \n");
+		
+	}
 }// end of class
