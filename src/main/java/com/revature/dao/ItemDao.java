@@ -15,8 +15,8 @@ import com.revature.models.Item;
 import com.revature.utils.ConnectionUtil;
 
 public class ItemDao implements ItemDaoInterface {
-	
-	//C-create/insert, R-read/select, U-update, D-delete
+
+	// C-create/insert, R-read/select, U-update, D-delete
 
 	@Override
 	public List<Item> getItems() {
@@ -32,7 +32,6 @@ public class ItemDao implements ItemDaoInterface {
 			// String sql = "SELECT * FROM \”schema_name”\.employees";
 			// String sql = "select * from \”Krusty_Crab”\.employees";
 
-			
 			// put the SQL query into a Statement object
 			Statement s = conn.createStatement();
 
@@ -51,8 +50,8 @@ public class ItemDao implements ItemDaoInterface {
 				// create a new employee object from each returned row...
 				Item e = new Item(
 						// we want to use rs.getXYZ for each column in the record
-						rs.getInt("itemID"), rs.getString("itemName"), rs.getInt("departmentID"),
-						rs.getString("size"), rs.getDouble("cost"), rs.getInt("amountStocked"), rs.getDouble("price"));
+						rs.getInt("itemID"), rs.getString("itemName"), rs.getInt("departmentID"), rs.getString("size"),
+						rs.getDouble("cost"), rs.getInt("amountStocked"), rs.getDouble("price"));
 				/*
 				 * this.employee_id = employee_id; this.first_name = first_name; this.last_name
 				 * = last_name; this.hire_date = hire_date; this.role_id = role_id;
@@ -95,15 +94,14 @@ public class ItemDao implements ItemDaoInterface {
 
 	@Override
 	public void addItem(Item item) {
-try(Connection conn = ConnectionUtil.getConnection()){
-			
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
 			// write out SQL query and store it in a String
-			String sql = "insert into items (itemName, departmentID, size, cost, amountStocked, price)" +
-			"values (?, ?, ?, ?, ?, ?)";//line break a sql statement in java by concatenation (not the +)
-						
-			
+			String sql = "insert into items (itemName, departmentID, size, cost, amountStocked, price)"
+					+ "values (?, ?, ?, ?, ?, ?)";// line break a sql statement in java by concatenation (not the +)
+
 			PreparedStatement ps = conn.prepareStatement(sql);
-			
+
 			ps.setString(1, item.getItemName());
 			ps.setInt(2, item.getDepartmentID());
 			ps.setString(3, item.getSize());
@@ -111,12 +109,11 @@ try(Connection conn = ConnectionUtil.getConnection()){
 			ps.setInt(5, item.getAmountStocked());
 			ps.setDouble(6, item.getPrice());
 
-			
-			ps.executeUpdate();//for anything that is not a Select statement, we use executeUpdate()
+			ps.executeUpdate();// for anything that is not a Select statement, we use executeUpdate()
 
-			//send confirmation to the console if successful
+			// send confirmation to the console if successful
 			System.out.println("Item was created successful. \n" + "Item: " + item.getItemName());
-			
+
 		} catch (SQLException e) {
 			System.out.println("something went wrong with your database");
 			e.printStackTrace();
@@ -124,26 +121,73 @@ try(Connection conn = ConnectionUtil.getConnection()){
 
 	}
 
+	/*
+	@Override
+	public void addItem(int itemID) {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			// write out SQL query and store it in a String
+			String sql = "insert into items (itemName, departmentID, size, cost, amountStocked, price)"
+					+ "values (?, ?, ?, ?, ?, ?)";// line break a sql statement in java by concatenation (not the +)
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, item.getItemName());
+			ps.setInt(2, item.getDepartmentID());
+			ps.setString(3, item.getSize());
+			ps.setDouble(4, item.getCost());
+			ps.setInt(5, item.getAmountStocked());
+			ps.setDouble(6, item.getPrice());
+
+			ps.executeUpdate();// for anything that is not a Select statement, we use executeUpdate()
+
+			// send confirmation to the console if successful
+			System.out.println("Item was created successful. \n" + "Item: " + item.getItemName());
+
+		} catch (SQLException e) {
+			System.out.println("something went wrong with your database");
+			e.printStackTrace();
+		}
+
+	}
+*/
+	
 	@Override
 	public void removeItem(int id) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			
+
 			String sql = "delete from items where itemID = ?";
-			
+
 			PreparedStatement ps = conn.prepareStatement(sql);
-			
+
 			ps.setInt(1, id);
 			ps.executeUpdate();
-			
+
 			System.out.println("Enter the ItemID#: " + id);
-			
-			
-		}catch (SQLException e) {
+
+		} catch (SQLException e) {
 			System.out.println("You can't fire me i quit!");
 			System.out.println("something went wrong with your database");
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void updateItem(Item item) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void updateItemAllInfo(int itemID, String itemName, int departmentID, String size, Double cost,
+			int amountStocked, double price) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void updateItemStock(int itemID, int amountStocked) {
+		// TODO Auto-generated method stub
+
+	}
 }
-
-

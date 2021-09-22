@@ -29,7 +29,9 @@ public interface ShippingLogDaoInterface {
 	public List<ShippingLog> getShippingLogById(int id);
 	
 	//INSERT
-	public void addShippingLog(ShippingLog shippingLog); //this will add an employee to the database
+	//public void addShippingLog(ShippingLog shippingLog); //this will add an employee to the database
+	//public void addShipmentLog(ShippingLog shipmentLog); //this will add an employee to the database
+	
 	
 	//DELETE
 	public void removeShippingLog(int id); // this will remove employees using their id

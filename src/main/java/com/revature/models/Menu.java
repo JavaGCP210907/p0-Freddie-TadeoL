@@ -39,42 +39,39 @@ public class Menu {
 			// menu options
 			System.out.println("hi -> get greated");
 
-			//display tables
+			// display tables
 			System.out.println("items -> show all items");
 			System.out.println("shipFullLog -> get both shippinglogs and transactions details");
 			System.out.println("shippingLog -> get shippinglogs");
 			System.out.println("buyers -> show buyers/suppliers");
 
-			//special n hardest, most new and self maded
-			//add transaction
-			System.out.println("X|sell -> sell item");
-			System.out.println("X|buy -> order item");
-			
+			// special n hardest, most new and self maded
+			// add transaction
+			System.out.println("W|sell -> sell item");
+			System.out.println("W|buy -> order item");
+
 			// explain more details of items shipped
 			System.out.println("transaction -> get info of one Shipment");
 			System.out.println("lookUpItem -> get info of one Item");
 			System.out.println("lookUpCustomer -> get info of one Customer");
-			//show invudal info by ID
-			//item
-			//buyer
-	
-			
+			// show invudal info by ID
+			// item
+			// buyer
+
 			// updateCustomerAdreess, updateCustomerAllInfo
 			System.out.println("updateCustomerAdreess, or updateCustomerAllInfo -> update a customors info");
 			System.out.println("addBuyers -> add new custmor info");
 
-			//can update delete to have backup graveyard items table to put old items
+			// can update delete to have backup graveyard items table to put old items
 			System.out.println("deleteItem -> remove Item to warehouse");
 			System.out.println("addItem -> add new Item to warehouse");
 
-			//more functions update/delete/add/show
-			//update item (price?) (backup table with id, price, and date changed)
-			//delete buyer (need backup table to hold loss info ID)
-			//add log (buy or sell)
-			//update or delete a log would be illegal?
-			
-		
-			
+			// more functions update/delete/add/show
+			// update item (price?) (backup table with id, price, and date changed)
+			// delete buyer (need backup table to hold loss info ID)
+			// add log (buy or sell)
+			// update or delete a log would be illegal?
+
 			System.out.println("exit -> exit application");
 
 			// parse user input after they choose a menu option
@@ -123,12 +120,11 @@ public class Menu {
 
 				break;
 			}
-			
+
 			case "addBuyers": {
 
 				System.out.println("What is the User's name?");
 				String username = scan.nextLine();
-
 
 				System.out.println("What is the User's address?");
 				String address = scan.nextLine();
@@ -139,12 +135,11 @@ public class Menu {
 
 				System.out.println("What is the User's PhoneNumber#?");
 				String phoneNumber = scan.nextLine();
-				
 
 				// create a new Employee based on these inputs
 				Customers emp = new Customers(username, address, phoneNumber);// xxx is for hire_date.
-																								// gets rewriteen in the
-																								// DAO
+																				// gets rewriteen in the
+																				// DAO
 
 				cDao.addCustomer(emp);
 				System.out.println("***Completed***");
@@ -254,7 +249,7 @@ public class Menu {
 
 				break;
 			}
-			
+
 			case "deleteItem": {
 
 				System.out.println(
@@ -353,43 +348,120 @@ public class Menu {
 				break;
 			}
 
-
 			case "buy": {
-				/*(just have to check if item alreat in stocked or adding a new item)
-				 * buy something: bring soemthing in
-				 * get user info of who buying from, check if they exist
-				 * update shipping log
-				 * get info(name/id) of items of interset, if alrady in stroage
-				 * create or locate items being brought/brought in
-				 * get info of transaction like quantity or price
-				 * update shipmentItemsLog
-				 * update items in storage
+				/*
+				 * (just have to check if item alreat in stocked or adding a new item) buy
+				 * something: bring soemthing in get user info of who buying from, check if they
+				 * exist update shipping log get info(name/id) of items of interset, if alrady
+				 * in stroage create or locate items being brought/brought in get info of
+				 * transaction like quantity or price update shipmentItemsLog update items in
+				 * storage
 				 * 
-				 * */
+				 */
+				String itemCheck = "0";
 				System.out.println(
-						"This will affect records, are you sure you want to do this?\n[Enter: 1 for yes/0 for no]");
+						"This will purschase more items and/or add more in stock?\n[Enter: 1 to continue/0 to abort]");
 				String dCheck = scan.next();
 				scan.nextLine();// still need this to move to the next line
 
+				if (dCheck.equals("no") || dCheck.equals("No") || dCheck.equals("0")) {
+
+					System.out.println("***Void transaction***");
+
+					break;
+				} else if (dCheck.equals("yes") || dCheck.equals("Yes") || dCheck.equals("1")) {
+
+					// statment starts
+					System.out.println("Is the Item already in stock? [Enter ID# or 0]");
+					// what if the user inputs a string? program crashes
+					// if statement, try/catch
+					// polish your project a bit and add some foll proofing
+					// if a # run as normal, else if !# then reloop and ask for a number
+					int empID = scan.nextInt();
+					scan.nextLine();
+
+					List<Item> itemA = iDao.getItemById(empID);
+
+					// BEN - enhanced for loop
+					for (Item ID : itemA) {
+						System.out.println(ID.toString());
+						itemCheck = "yes";
+					}
+					
+					if (itemCheck.equals("no") || itemCheck.equals("No") || itemCheck.equals("0")) {
+
+						//iDao.addItem(empID);
+						System.out.println("***Inputing new item***");
+
+						break;
+					} else if (itemCheck.equals("yes") || itemCheck.equals("Yes") || itemCheck.equals("1")) {
+
+						System.out.println("How much of this item is being brought?");
+						// what if the user inputs a string? program crashes
+						// if statement, try/catch
+						// polish your project a bit and add some foll proofing
+						// if a # run as normal, else if !# then reloop and ask for a number
+						int stock = scan.nextInt();
+						scan.nextLine();
+						
+						iDao.updateItemStock(empID, stock);
+						//slDao.addShippingLog(shippingLog);
+						//slDao.createshipmentItems();
+						
+						System.out.println("***Completed***");
+
+						log.warn("Added Item# " + empID);
+
+						break;
+					}
+					break;
+				}
 				break;
 			}
 
 			case "sell": {
-				/*(no check needed cuz can only sell items in stock)
-				 *  sell something: take items out
-				 * get user info of who you selling to, check if they exist
-				 * update shipping log
-				 * get info of items of interset, if aviable
-				 * locate items being brought/brought in
-				 * update shipmentItemsLog
-				 * update items in storage
+				/*
+				 * (no check needed cuz can only sell items in stock) sell something: take items
+				 * out get user info of who you selling to, check if they exist update shipping
+				 * log get info of items of interset, if aviable locate items being
+				 * brought/brought in update shipmentItemsLog update items in storage
 				 * 
-				 * */
+				 */
 				System.out.println(
-						"This will affect records, are you sure you want to do this?\n[Enter: 1 for yes/0 for no]");
+						"This will change our invertory, are you sure you want to do this?\n[Enter: 1 for yes/0 for no]");
 				String dCheck = scan.next();
 				scan.nextLine();// still need this to move to the next line
 
+				if (dCheck.equals("no") || dCheck.equals("No") || dCheck.equals("0")) {
+
+					System.out.println("***Void transaction***");
+
+					break;
+				} else if (dCheck.equals("yes") || dCheck.equals("Yes") || dCheck.equals("1")) {
+
+					// statment starts
+					System.out.println("what item is being sold? [Enter ID#]");
+					// what if the user inputs a string? program crashes
+					// if statement, try/catch
+					// polish your project a bit and add some foll proofing
+					// if a # run as normal, else if !# then reloop and ask for a number
+					int empID = scan.nextInt();
+					scan.nextLine();
+					
+					System.out.println("how much of the item is being sold? [Enter amount]");
+					// what if the user inputs a string? program crashes
+					// if statement, try/catch
+					// polish your project a bit and add some foll proofing
+					// if a # run as normal, else if !# then reloop and ask for a number
+					int stock = scan.nextInt();
+					scan.nextLine();
+					
+					iDao.updateItemStock(empID, stock);
+					//slDao.addShippingLog(shippingLog);
+					//slDao.createshipmentItems();
+					
+					break;
+				}
 				break;
 			}
 
