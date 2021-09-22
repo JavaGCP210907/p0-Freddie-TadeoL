@@ -19,7 +19,10 @@ public class Menu {
 	// All of menu options and control flow are contained within this method
 	public void displayMenu() {
 
-		boolean displayMenu = true; // going to use this to toggle whether the menu continues after user input
+		boolean displayMenu = true;
+		boolean displayMenu0 = true;
+		boolean displayMenu1 = false;
+		boolean displayMenu2 = false; // going to use this to toggle whether the menu continues after user input
 		// int in;
 		Scanner scan = new Scanner(System.in);
 
@@ -32,58 +35,68 @@ public class Menu {
 		while (displayMenu) {
 
 			// log.info("ENTER WHILE MAIN LOOP");
-			
-			//To-Do:
-			//clean up code format
-			//fix up printed menu
-			//debug safty checks
-			//put log tackers
-			
-			//C-create/insert, R-read/select, U-update, D-delete
+
+			// To-Do:
+			// clean up code format
+			// fix up printed menu
+			// debug safty checks
+			// put log tackers
+
+			// C-create/insert, R-read/select, U-update, D-delete
 			System.out.println("-------------------");
 			System.out.println("Choose an Option:( X|-Not Implemented, & W|-Working on )");
 			System.out.println("-------------------");
 
-			// menu options
-			System.out.println("hi -> get greated");
-
+			System.out.println("\n=======================(Display [Read tables])=======================\n");
 			// display tables
-			System.out.println("items -> show all items");
-			System.out.println("shipFullLog -> get both shippinglogs and transactions details");
-			System.out.println("shippingLog -> get shippinglogs");
-			System.out.println("buyers -> show buyers/suppliers");
+			System.out.println("items -> show all items.");
+			System.out.println("shipFullLog -> get all transactions details.");
+			System.out.println("shippingLog -> get shippinglogs.");
+			System.out.println("buyers -> show all buyers and suppliers.");
+
+			System.out.println("\n======================(Transactions [Insert or update])========================\n");
 
 			// special n hardest, most new and self maded
 			// add transaction
+			System.out.println("addBuyers -> add new customer info");
 			System.out.println("W|sell -> sell item");
 			System.out.println("W|buy -> order item");
-			
+
+			System.out
+					.println("\n========================(Modfiy Inventory [Delete or Insert])======================\n");
+
+			System.out.println("deleteItem -> remove Item to warehouse");
+			System.out.println("addItem -> add new Item to warehouse");
+
+			System.out.println("\n========================(Look up specfic info. [Read])======================\n");
+
 			// *w|add log (buy or sell)
 			// update or delete a log would be illegal?
-			
+
 			// explain more details of items shipped
 			System.out.println("transaction -> get info of one Shipment");
-			
+
 			System.out.println("X|lookUpItem -> get info of one Item");
 			System.out.println("X|lookUpCustomer -> get info of one Customer");
 			// show invudal info by ID
 			// **item
 			// **buyer
+			
+			System.out.println("\n=======================(Update info.)=======================\n");
 
 			// updateCustomerAdreess, updateCustomerAllInfo
 			System.out.println("updateCustomerAdreess, or updateCustomerAllInfo -> update a customors info");
-			System.out.println("addBuyers -> add new custmor info");
 			// *delete buyer (need backup table to hold loss info ID)
-			
+
 			// can update delete to have backup graveyard items table to put old items
 			System.out.println("X|updateItemPrice, or updateItemAllInfo -> update a item info");
-			System.out.println("deleteItem -> remove Item to warehouse");
-			System.out.println("addItem -> add new Item to warehouse");
+
+			System.out.println("\n==============================================\n");
+
+			System.out.println("more -> display more options: ");
 
 			// more functions update/delete/add/show
 			// **update item (price?) (backup table with id, price, and date changed)
-			
-			
 
 			System.out.println("exit -> exit application");
 
@@ -95,12 +108,6 @@ public class Menu {
 			// look at out dao layer interface to see everything the CLI is able to do
 
 			switch (input) {
-
-			case "hi": {
-				System.out.println("option 1: hey what's up");
-				break;// we need a break for each case
-
-			}
 
 			case "items": {// get the List of Employees from the DAO layer
 				// nothing is here yet, but will do some sql functionsallity
@@ -634,6 +641,34 @@ public class Menu {
 					break;
 				}
 				break;
+			}
+
+			case "more": {
+				System.out.println("display more options: ");
+				if (displayMenu0 && !displayMenu1) {
+					displayMenu1 = true;
+					displayMenu0 = false;
+					displayMenu2 = false;
+
+					System.out.println("display info options: ");
+
+				} else if (displayMenu1 && !displayMenu2) {
+					displayMenu2 = true;
+					displayMenu0 = false;
+					displayMenu1 = false;
+
+					System.out.println("display add/delete options: ");
+
+				} else {
+					displayMenu0 = true;
+					displayMenu1 = false;
+					displayMenu2 = false;
+
+					System.out.println("display main options: ");
+				}
+
+				break;
+
 			}
 
 			case "exit": {
