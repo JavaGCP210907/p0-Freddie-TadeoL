@@ -41,7 +41,7 @@ price decimal
 CREATE TABLE shipmentItems(
 quantity int,
 shipmentID int REFERENCES shippingLog (shipmentID),
-itemID int REFERENCES items (itemID), -- FOREIGN KEY: establishes a relationship
+itemID int, --REFERENCES items (itemID)  FOREIGN KEY: establishes a relationship
 price decimal,
 PRIMARY KEY (shipmentID, itemID)
 );

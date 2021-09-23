@@ -210,7 +210,7 @@ public class ItemDao implements ItemDaoInterface {
 			System.out.println("Enter the ItemID#: " + id);
 
 		} catch (SQLException e) {
-			System.out.println("You can't fire me i quit!");
+			//System.out.println("You can't fire me i quit!");
 			System.out.println("something went wrong with your database");
 			e.printStackTrace();
 		}
@@ -248,12 +248,12 @@ public class ItemDao implements ItemDaoInterface {
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 
-			ps.setInt(1, (amountStocked + currentStocked));
+			ps.setInt(1, (currentStocked - amountStocked));
 			ps.setInt(2, itemID);
 
 			ps.executeUpdate();
 
-			System.out.println(amountStocked + " of item: " + itemID + " has been restocked.");
+			System.out.println(amountStocked + " of item: " + itemID + " has been sold.");
 
 		} catch (SQLException e) {
 			System.out.println("Updating your info has failed");
@@ -281,7 +281,7 @@ public class ItemDao implements ItemDaoInterface {
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 
-			ps.setInt(1, (currentStocked - amountStocked));
+			ps.setInt(1, (currentStocked + amountStocked));
 			ps.setInt(2, itemID);
 
 			ps.executeUpdate();

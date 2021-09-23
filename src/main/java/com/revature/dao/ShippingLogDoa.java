@@ -268,7 +268,7 @@ public class ShippingLogDoa implements ShippingLogDaoInterface {
 			ps.executeUpdate();// for anything that is not a Select statement, we use executeUpdate()
 
 			// send confirmation to the console if successful
-			System.out.println("New Log was created successful. \n");
+			//System.out.println("New Log was created successful. \n");
 
 		} catch (SQLException e) {
 			System.out.println("something went wrong with your database");

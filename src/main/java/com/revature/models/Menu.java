@@ -35,8 +35,6 @@ public class Menu {
 		// display the menu as long as the displayMenu boolean is true
 		while (displayMenu) {
 
-		
-
 			// To-Do:
 			// put log tackers
 			// fix up printed menu
@@ -45,19 +43,15 @@ public class Menu {
 
 			// C-create/insert, R-read/select, U-update, D-delete
 
-			
-			
 			System.out.println("-------------------");
-			System.out.println("Choose an Option:( X|-Not Implemented, & W|-Working on )");
+			System.out.println("Choose an Option:");
 			System.out.println("-------------------");
-			
-			if(displayMenu0 & !logIn) {
+
+			if (displayMenu0 & !logIn) {
 				System.out.println("logIn -> Display Options: ");
 			}
-			
-		
-			
-			//System.out.println("more -> display more options: ");
+
+			// System.out.println("more -> display more options: ");
 
 			// more functions update/delete/add/show
 			// **update item (price?) (backup table with id, price, and date changed)
@@ -83,7 +77,8 @@ public class Menu {
 					System.out.println(emp);
 				}
 				// System.out.println(employees);
-				
+
+				System.out.println("Departments' #: [--1:tech---2:house---:outdoors\n4:clothes---5:food---6:tools");
 				System.out.println("\n");
 				printMenu();
 
@@ -105,7 +100,7 @@ public class Menu {
 
 				System.out.println("\n");
 				printMenu();
-				
+
 				log.info("USER RETRIVED LIST OF ALL CUSTOMERS");
 
 				break;
@@ -113,7 +108,7 @@ public class Menu {
 
 			case "addBuyers": {
 
-				System.out.println("What is the User's name?");
+				System.out.println("What is the User's name? [John Smith or Wallmart]");
 				String username = scan.nextLine();
 
 				System.out.println("What is the User's address?");
@@ -123,7 +118,7 @@ public class Menu {
 				// polish your project a bit and add some foll proofing
 				// if a # run as normal, else if !# then reloop and ask for a number
 
-				System.out.println("What is the User's PhoneNumber#?");
+				System.out.println("What is the User's PhoneNumber? [#]");
 				String phoneNumber = scan.nextLine();
 
 				// create a new Employee based on these inputs
@@ -149,8 +144,10 @@ public class Menu {
 				for (ShippingLog emp : shippingLog) {
 					System.out.println(emp.toString2());
 				}
+
+				System.out.println("\nDepartments' #: --1:tech\n2:house\n3:outdoors\n4:clothes\n5:food\n6:tools");
 				// System.out.println(employees);
-				
+
 				System.out.println("\n");
 				printMenu();
 
@@ -169,7 +166,7 @@ public class Menu {
 					System.out.println(emp.toString1());
 				}
 				// System.out.println(employees);
-				
+
 				System.out.println("\n");
 				printMenu();
 
@@ -194,7 +191,10 @@ public class Menu {
 				for (ShippingLog emp : transaction) {
 					System.out.println(emp.toString2());
 				}
-				
+
+				System.out.println("\n");
+
+				System.out.println("Departments' #: [--1:tech---2:house---:outdoors\n4:clothes---5:food---6:tools]");
 				log.info("USER RETRIVED THE INFO OF SHIPMENT: " + idInput);
 				printOthers();
 				break;
@@ -218,6 +218,8 @@ public class Menu {
 				String itemName = scan.nextLine();
 
 				System.out.println("What is the item's department from?(1-5)");
+				System.out.println("Departments' #: [--1:tech---2:house---:outdoors\n4:clothes---5:food---6:tools");
+
 				// System.out.println("1-Techology");
 				int departmentID = scan.nextInt();
 				scan.nextLine();
@@ -264,7 +266,7 @@ public class Menu {
 				if (dCheck.equals("no") || dCheck.equals("No") || dCheck.equals("0")) {
 
 					System.out.println("********ABORTING*******");
-					
+
 				} else if (dCheck.equals("yes") || dCheck.equals("Yes") || dCheck.equals("1")) {
 
 					System.out.println("What is the Item ID# to delete?");
@@ -283,14 +285,14 @@ public class Menu {
 					break;
 
 				}
-				
-				//System.out.println("you reached the end without the getting the checks!!");
+
+				// System.out.println("you reached the end without the getting the checks!!");
 				printInserts();
-				
+
 				break;
 			}
 
-			case "updateCustomerAdreess": {
+			case "updateCustomerAddress": {
 
 				System.out.println("What BuyerID do you want to update?");
 				int titleInput = scan.nextInt();
@@ -331,7 +333,7 @@ public class Menu {
 				 * 
 				 * break;
 				 */
-				System.out.println("What salary would you like to update? (Role Title)");
+				System.out.println("What User would you like to update? [ID#]");
 				int customerID = scan.nextInt();
 				scan.nextLine();
 
@@ -340,13 +342,13 @@ public class Menu {
 				// polish your project a bit and add some foll proofing
 				// if a # run as normal, else if !# then reloop and ask for a number
 
-				System.out.println("Enter a new Salary: ");
+				System.out.println("What is the new Username?[Wallmart or John Smith]");
 				String username = scan.nextLine();
 
-				System.out.println("Enter a new Salary: ");
+				System.out.println("What is the new address? ");
 				String address = scan.nextLine();
 
-				System.out.println("Enter a new Salary: ");
+				System.out.println("What is the User's new phone number? [#]");
 				String phoneNumber = scan.nextLine();
 
 				cDao.updateCustomerAllInfo(customerID, username, address, phoneNumber);
@@ -376,28 +378,25 @@ public class Menu {
 				double temp2 = 0;
 				int counter = 0;
 				System.out.println(
-						"This will purschase more items and/or add more in stock?\n[Enter: 1 to continue/0 to abort]");
+						"This will purchase more items and/or add more in stock?\n[Enter: 1 to continue/0 to abort]");
 				String dCheck = scan.next();
 				scan.nextLine();// still need this to move to the next line
-
-				
 
 				if (dCheck.equals("no") || dCheck.equals("No") || dCheck.equals("0")) {
 
 					System.out.println("***Void transaction***");
-					
 
 				} else if (dCheck.equals("yes") || dCheck.equals("Yes") || dCheck.equals("1")) {
 
 					// statment starts
-					System.out.println("who is buying this? [Enter ID#]");
+					System.out.println("Who is buying this? [Enter ID#]");
 					// what if the user inputs a string? program crashes
 					// if statement, try/catch
 					// polish your project a bit and add some foll proofing
 					// if a # run as normal, else if !# then reloop and ask for a number
 					int custID = scan.nextInt();
 					scan.nextLine();
-					
+
 					// statment starts
 					System.out.println("Is the Item already in stock if so enter ID#? [Enter ID# or 0]");
 					// what if the user inputs a string? program crashes
@@ -413,19 +412,21 @@ public class Menu {
 					for (Item ID : itemA) {
 						System.out.println(ID.toString());
 						itemCheck = "yes";
-						//System.out.println(itemCheck);
+						// System.out.println(itemCheck);
 					}
 
 					if (itemCheck.equals("no") || itemCheck.equals("No") || itemCheck.equals("0")) {
 
-						System.out.println("What is this Item called?");
+						System.out.println("What is this Item called? [Ex. Ipad]");
 						// what if the user inputs a string? program crashes
 						// if statement, try/catch
 						// polish your project a bit and add some foll proofing
 						// if a # run as normal, else if !# then reloop and ask for a number
 						String itemName = scan.nextLine();
 
-						System.out.println("What type of item is this?");
+						System.out.println("What type of item is this?[Department #]");
+
+						System.out.println("Departments' #: --1:tech\n2:house\n3:outdoors\n4:clothes\n5:food\n6:tools");
 						// what if the user inputs a string? program crashes
 						// if statement, try/catch
 						// polish your project a bit and add some foll proofing
@@ -433,14 +434,14 @@ public class Menu {
 						int departmentID = scan.nextInt();
 						scan.nextLine();
 
-						System.out.println("how big is this item");
+						System.out.println("how big is this item [xxx]");
 						// what if the user inputs a string? program crashes
 						// if statement, try/catch
 						// polish your project a bit and add some foll proofing
 						// if a # run as normal, else if !# then reloop and ask for a number
 						String size = scan.nextLine();
 
-						System.out.println("how much does this item cost?");
+						System.out.println("how much does this item cost? [$$.$$]");
 						// what if the user inputs a string? program crashes
 						// if statement, try/catch
 						// polish your project a bit and add some foll proofing
@@ -456,7 +457,7 @@ public class Menu {
 						int amountStocked = scan.nextInt();
 						scan.nextLine();
 
-						System.out.println("How much how will this item be solded?");
+						System.out.println("How much how will this item be solded? [$$.$$]");
 						// what if the user inputs a string? program crashes
 						// if statement, try/catch
 						// polish your project a bit and add some foll proofing
@@ -476,8 +477,9 @@ public class Menu {
 							temp = counter;
 							temp3 = emp.getItemID();
 
-							//System.out.println("temp: " + temp + "\ntemp2: " + temp2 + "temp3: " + temp + "\ncounter: "
-								//	+ counter + "\n---------------------");
+							// System.out.println("temp: " + temp + "\ntemp2: " + temp2 + "temp3: " + temp +
+							// "\ncounter: "
+							// + counter + "\n---------------------");
 						}
 
 						List<ShippingLog> transactionz = slDao.createShippingLog();
@@ -488,7 +490,8 @@ public class Menu {
 							counter++;
 							temp4 = counter;
 
-							//System.out.println("temp2: " + temp2 + "\ncounter: " + counter + "\n---------------------");
+							// System.out.println("temp2: " + temp2 + "\ncounter: " + counter +
+							// "\n---------------------");
 						}
 
 						slDao.addShipmentLog(amountStocked, temp4, temp3, price);
@@ -508,7 +511,7 @@ public class Menu {
 						int stock = scan.nextInt();
 						scan.nextLine();
 
-						System.out.println("how much does this item cost?");
+						System.out.println("how much does this item cost?[$$.$$]");
 						// what if the user inputs a string? program crashes
 						// if statement, try/catch
 						// polish your project a bit and add some foll proofing
@@ -516,7 +519,7 @@ public class Menu {
 						double cost = scan.nextDouble();
 						scan.nextLine();
 
-						iDao.updateItemStock(empID, stock);
+						iDao.updatAddItemStock(empID, stock);
 						slDao.addShippingLog(custID);
 
 						List<ShippingLog> transaction = slDao.createShippingLog();
@@ -527,8 +530,9 @@ public class Menu {
 							temp4 = counter;
 							temp3 = emp.getItemID();
 
-							//System.out.println("fristloop" + "temp: " + temp + "\ntemp2: " + temp2 + "temp3: " + temp
-							//		+ "\ncounter: " + counter + "\n---------------------");
+							// System.out.println("fristloop" + "temp: " + temp + "\ntemp2: " + temp2 +
+							// "temp3: " + temp
+							// + "\ncounter: " + counter + "\n---------------------");
 						}
 
 						List<ShippingLog> transactions = slDao.createshipmentItems();
@@ -540,8 +544,8 @@ public class Menu {
 							temp = counter;
 							temp2 = emp.getPrice();
 
-						//	System.out.println("secondloop" + "temp: " + temp + "\ncounter: " + counter
-						//			+ "\n---------------------");
+							// System.out.println("secondloop" + "temp: " + temp + "\ncounter: " + counter
+							// + "\n---------------------");
 						}
 
 						List<Item> transactionsz = iDao.getItemById(empID);
@@ -551,8 +555,8 @@ public class Menu {
 							temp3 = emp.getItemID();
 							temp2 = emp.getPrice();
 
-							//System.out.println("thirdloop" + "temp: " + temp + "\ncounter: " + counter
-							//		+ "\n---------------------");
+							// System.out.println("thirdloop" + "temp: " + temp + "\ncounter: " + counter
+							// + "\n---------------------");
 						}
 
 						slDao.addShipmentLog(stock, temp4, empID, temp2);
@@ -576,7 +580,7 @@ public class Menu {
 				 * 
 				 */
 				int empID = 0;
-				
+
 				System.out.println(
 						"This will change our invertory, are you sure you want to do this?\n[Enter: 1 for yes/0 for no]");
 				String dCheck = scan.next();
@@ -586,11 +590,10 @@ public class Menu {
 
 					System.out.println("***Void transaction***");
 
-			
 				} else if (dCheck.equals("yes") || dCheck.equals("Yes") || dCheck.equals("1")) {
 
 					// statment starts
-					System.out.println("who is buying this? [Enter ID#]");
+					System.out.println("Who is buying this? [Enter User-ID#]");
 					// what if the user inputs a string? program crashes
 					// if statement, try/catch
 					// polish your project a bit and add some foll proofing
@@ -598,7 +601,7 @@ public class Menu {
 					int custID = scan.nextInt();
 					scan.nextLine();
 
-					System.out.println("what item is being sold? [Enter ID#]");
+					System.out.println("What item is being sold? [Enter Item-ID#]");
 					// what if the user inputs a string? program crashes
 					// if statement, try/catch
 					// polish your project a bit and add some foll proofing
@@ -609,7 +612,7 @@ public class Menu {
 					double temp2 = 0;
 					int counter = 0;
 
-					System.out.println("how much of the item is being sold? [Enter amount]");
+					System.out.println("How much of the item is being sold? [Enter amount]");
 					// what if the user inputs a string? program crashes
 					// if statement, try/catch
 					// polish your project a bit and add some foll proofing
@@ -634,37 +637,36 @@ public class Menu {
 
 					slDao.addShipmentLog(stock, temp, empID, temp2);
 
-					break;
 				}
 				log.info("USER SOLD ITEM: " + empID);
 				System.out.println("\n");
 				printMenu();
 				break;
 			}
-			
+
 			case "logIn": {
-				
+
 				input = "more";
 				log.info("USER LOGGED IN");
-			
+
 			}
-			
 
 			case "more": {
-				//System.out.println("\n==============================================\n");
-				//System.out.println("display more options: ");
+				// System.out.println("\n==============================================\n");
+				// System.out.println("display more options: ");
 				if (displayMenu0 && !displayMenu1) {
 					displayMenu1 = true;
 					displayMenu0 = false;
 					displayMenu2 = false;
 					logIn = true;
-					
+
 					printMenu();
-					
-					if(!displayMenu1) {
-					printMenu();}
-			
-					//System.out.println("\n==============================================\n");
+
+					if (!displayMenu1) {
+						printMenu();
+					}
+
+					// System.out.println("\n==============================================\n");
 
 				} else if (displayMenu1 && !displayMenu2) {
 					displayMenu2 = true;
@@ -679,11 +681,12 @@ public class Menu {
 					displayMenu1 = false;
 					displayMenu2 = false;
 					logIn = true;
-					//System.out.println("0: " + displayMenu0 + " 1: " + displayMenu1 + " 2: " + displayMenu2 + " main: " + displayMenu);
+					// System.out.println("0: " + displayMenu0 + " 1: " + displayMenu1 + " 2: " +
+					// displayMenu2 + " main: " + displayMenu);
 
 					printOthers();
-					
-					//System.out.println("\n==============================================\n");
+
+					// System.out.println("\n==============================================\n");
 				}
 
 				break;
@@ -693,7 +696,7 @@ public class Menu {
 			case "exit": {
 				displayMenu = false; // this is how we break out og the while loop, ending the menu display
 				System.out.println("Logging off");
-				//print();
+				// print();
 
 				log.warn("Closing main loop|| " + displayMenu + " = DisplayMenu");
 
@@ -707,7 +710,7 @@ public class Menu {
 			}// end of switch statement
 
 		} // end of while loop
-		
+
 		log.info("USER LOGGING OFF");
 		System.out.println("Thank you for using our I&SM System");
 		scan.close();
@@ -716,7 +719,7 @@ public class Menu {
 
 	public void printMenu() {
 		System.out.println("\nDisplay main options: ");
-		
+
 		System.out.println("\n=======================(Display [Read tables] )=======================\n");
 		// display tables
 		System.out.println("items -> show all items.");
@@ -729,47 +732,48 @@ public class Menu {
 		// special n hardest, most new and self maded
 		// add transaction
 		System.out.println("addBuyers -> add new customer info");
-		System.out.println("W|sell -> sell item");
-		System.out.println("W|buy -> order item");
-		
+		System.out.println("sell -> sell item");
+		System.out.println("buy -> order item");
+
 		System.out.println("\nmore -> display more options: \n");
-		
+
 	}
-	
+
 	public void printInserts() {
 		System.out.println("\nDisplay Add/Delete options: ");
-		
-		System.out
-		.println("\n========================(Modfiy Inventory [Delete or Insert] )======================\n");
 
-System.out.println("deleteItem -> remove Item to warehouse");
-System.out.println("addItem -> add new Item to warehouse");
+		System.out.println("\n========================(Modfiy Inventory [Delete or Insert] )======================\n");
 
-		
+		System.out.println("deleteItem -> remove Item to warehouse");
+		System.out.println("addItem -> add new Item to warehouse");
+
 		System.out.println("\n=======================( Update info. )=======================\n");
 
 		// updateCustomerAdreess, updateCustomerAllInfo
-		System.out.println("updateCustomerAdreess -> update a customors info\nupdateCustomerAllInfo -> update a customors info");
+		System.out.println(
+				"updateCustomerAddress -> update a customors info\nupdateCustomerAllInfo -> update a customors info");
 		// *delete buyer (need backup table to hold loss info ID)
 
 		// can update delete to have backup graveyard items table to put old items
-		System.out.println("X|updateItemPrice -> update a item info\nX|updateItemAllInfo -> update a item info");
+		// System.out.println("X|updateItemPrice -> update a item
+		// info\nX|updateItemAllInfo -> update a item info");
 
-		//System.out.println("\n==============================================\n");
+		// System.out.println("\n==============================================\n");
 
 		System.out.println("\nmore -> display more options: \n");
-		
+
 	}
+
 	public void printOthers() {
 		System.out.println("\nDisplay Search options: ");
-		
+
 		System.out.println("\n========================(Look up specfic info. [Read])======================\n");
 		System.out.println("transaction -> get info of one Shipment");
 
-		System.out.println("X|lookUpItem -> get info of one Item");
-		System.out.println("X|lookUpCustomer -> get info of one Customer");
-				
+		// System.out.println("X|lookUpItem -> get info of one Item");
+		// System.out.println("X|lookUpCustomer -> get info of one Customer");
+
 		System.out.println("\nmore -> display more options: \n");
-		
+
 	}
 }// end of class
